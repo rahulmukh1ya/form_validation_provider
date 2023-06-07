@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'form_provider.dart';
+import 'provider_form_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (_) => FormProvider(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -90,15 +96,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                       ),
                       child: const Padding(
-                        padding: EdgeInsets.all(24.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            TextField(),
-                          ],
-                        ),
-                      ),
+                          padding: EdgeInsets.all(24.0),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [ProviderFormPage()],
+                            ),
+                          )),
                     ),
                   )
                 ], //children

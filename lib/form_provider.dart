@@ -44,7 +44,7 @@ class FormProvider extends ChangeNotifier {
   }
 
   void validateRePassword(String? val) {
-    if (val != null && val == _password.value) {
+    if (val != null && val == password.value) {
       _rePassword = ValidationModel(val, null);
     } else {
       _rePassword = ValidationModel(null, 'Password does not match');
