@@ -25,7 +25,7 @@ class _ProviderFormPageState extends State<ProviderFormPage> {
           children: [
             CustomFormField(
               labelText: 'Name',
-              hintText: 'Enter your name',
+              hintText: 'Your Name, e.g: John Doe',
               inputFormatters: [
                 FilteringTextInputFormatter.allow(
                   RegExp(r"[a-zA-Z]+|\s"),
@@ -36,13 +36,13 @@ class _ProviderFormPageState extends State<ProviderFormPage> {
             ),
             CustomFormField(
               labelText: 'Email',
-              hintText: 'Enter your email',
+              hintText: 'Your email, e.g: johndoe@gmail.com',
               onChanged: _formProvider.validateEmail,
               errorText: _formProvider.email.error,
             ),
             CustomFormField(
               labelText: 'Phone',
-              hintText: 'Enter your phone number',
+              hintText: 'Your phone number, e.g: 98xxxxxxxx',
               onChanged: _formProvider.validatePhone,
               errorText: _formProvider.phone.error,
               inputFormatters: [
@@ -62,6 +62,34 @@ class _ProviderFormPageState extends State<ProviderFormPage> {
               hintText: 'Re-enter your password',
               onChanged: _formProvider.validateRePassword,
               errorText: _formProvider.repassword.error,
+            ),
+            CustomFormField(
+              labelText: 'Address',
+              hintText: 'Enter your address',
+              onChanged: _formProvider.validateAddress,
+              errorText: _formProvider.address.error,
+            ),
+            CustomFormField(
+              labelText: 'Zip Code',
+              hintText: 'Enter your Zip Code',
+              onChanged: _formProvider.validateZipCode,
+              errorText: _formProvider.zipCode.error,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(
+                  RegExp(r"[0-9]"),
+                )
+              ],
+            ),
+            CustomFormField(
+              labelText: 'Second Phone Number',
+              hintText: 'Enter your second phone number (Optional)',
+              onChanged: _formProvider.validateSecPhone,
+              errorText: _formProvider.secPhone.error,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(
+                  RegExp(r"[0-9]"),
+                )
+              ],
             ),
             Consumer<FormProvider>(
               builder: (context, model, child) {

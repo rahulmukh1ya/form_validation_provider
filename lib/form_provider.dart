@@ -38,7 +38,7 @@ class FormProvider extends ChangeNotifier {
       _password = ValidationModel(val, null);
     } else {
       _password = ValidationModel(null,
-          'Password must contain uppercase, lowercase, numeric digit and special character');
+          'Password must be atleast 6 characters long');
     }
     notifyListeners();
   }
@@ -66,7 +66,7 @@ class FormProvider extends ChangeNotifier {
     if (val != null && val.isValidPhone) {
       _phone = ValidationModel(val, null);
     } else {
-      _phone = ValidationModel(null, 'Phone number must be upto 11 digits');
+      _phone = ValidationModel(null, 'Phone number consist of 10 digits');
     }
     notifyListeners();
   }
@@ -75,13 +75,13 @@ class FormProvider extends ChangeNotifier {
     if (val != null && val.isValidPhone) {
       _secPhone = ValidationModel(val, null);
     } else {
-      _secPhone = ValidationModel(null, 'Phone number must be upto 11 digits');
+      _secPhone = ValidationModel(null, 'Phone number consist of 10 digits');
     }
     notifyListeners();
   }
 
   void validateAddress(String? val) {
-    if (val != null) {
+    if (val != null && val != '') {
       _address = ValidationModel(val, null);
     } else {
       _phone = ValidationModel(null, 'Address cannot be empty');
@@ -103,6 +103,8 @@ class FormProvider extends ChangeNotifier {
         _password.value != null &&
         _password.value == _rePassword.value &&
         _phone.value != null &&
+        _zipCode.value !=null &&
+        _address.value != null &&
         _name.value != null;
   }
 }
