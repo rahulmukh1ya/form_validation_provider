@@ -109,7 +109,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 ], //children
               ),
               const Positioned(
-                  top: 230,
+                  top: 225,
                   child: CircleAvatar(
                     backgroundColor: Colors.grey,
                     radius: 50,

@@ -54,12 +54,14 @@ class _ProviderFormPageState extends State<ProviderFormPage> {
             CustomFormField(
               labelText: 'Password',
               hintText: 'Enter your password',
+              obscureText: true,
               onChanged: _formProvider.validatePassword,
               errorText: _formProvider.password.error,
             ),
             CustomFormField(
               labelText: 'Confirm Password',
               hintText: 'Re-enter your password',
+              obscureText: true,
               onChanged: _formProvider.validateRePassword,
               errorText: _formProvider.repassword.error,
             ),
@@ -93,15 +95,26 @@ class _ProviderFormPageState extends State<ProviderFormPage> {
             ),
             Consumer<FormProvider>(
               builder: (context, model, child) {
-                return ElevatedButton(
-                  onPressed: () {
-                    if (model.validate) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => const HomePage(),
-                      ));
-                    }
-                  },
-                  child: const Text('Submit'),
+                return Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (model.validate) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => const HomePage(),
+                        ));
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: const StadiumBorder(),
+                      backgroundColor: Colors.yellow[800],
+                      minimumSize: const Size.fromHeight(50),
+                    ),
+                    child: const Text(
+                      'Submit',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
                 );
               },
             )
