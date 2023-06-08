@@ -108,12 +108,22 @@ class _LoginWidgetState extends State<LoginWidget> {
                   )
                 ], //children
               ),
-              const Positioned(
-                  top: 225,
-                  child: CircleAvatar(
+              Positioned(
+                top: 225,
+                // child: CircleAvatar(
+                //   backgroundColor: Colors.grey,
+                //   radius: 50,
+                // ),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(35),
                     backgroundColor: Colors.grey,
-                    radius: 50,
-                  )),
+                  ),
+                  child: const Icon(Icons.camera_alt),
+                ),
+              ),
             ],
           ),
         ),

@@ -84,7 +84,7 @@ class FormProvider extends ChangeNotifier {
     if (val != null && val != '') {
       _address = ValidationModel(val, null);
     } else {
-      _phone = ValidationModel(null, 'Address cannot be empty');
+      _address = ValidationModel(null, 'Address cannot be empty');
     }
     notifyListeners();
   }
