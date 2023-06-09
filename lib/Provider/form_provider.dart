@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:form_validation/validation_model.dart';
-import 'regex_extension.dart';
+import 'package:form_validation/Models/validation_model.dart';
+import '../Utils/regex_extension.dart';
 
 class FormProvider extends ChangeNotifier {
   //name, email, password, re-password, phone no, address

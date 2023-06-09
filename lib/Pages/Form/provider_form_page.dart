@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:form_validation/form_provider.dart';
+import 'package:form_validation/Provider/form_provider.dart';
 import 'custom_form_field.dart';
-import 'home_page.dart';
+import '../home_page.dart';
 
 class ProviderFormPage extends StatefulWidget {
   const ProviderFormPage({super.key});
