@@ -2,8 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Provider/form_provider.dart';
 import 'Pages/register_page.dart';
+import 'package:camera/camera.dart';
+import 'Utils/snackbar_utils.dart';
 
-void main() {
+List<CameraDescription> cameras = <CameraDescription>[];
+
+void main() async {
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    print(e.toString());
+    Utils.showSnackBar(e.toString());
+    
+  }
   runApp(ChangeNotifierProvider(
     create: (_) => FormProvider(),
     child: const MyApp(),
@@ -23,4 +35,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

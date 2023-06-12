@@ -1,5 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:form_validation/Utils/snackbar_utils.dart';
+import 'package:form_validation/main.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({super.key});
@@ -9,7 +11,7 @@ class CameraPage extends StatefulWidget {
 }
 
 class _CameraPageState extends State<CameraPage> {
-  late List<CameraDescription> cameras;
+  // late List<CameraDescription> cameras;
   late CameraController cameraController;
   int direction = 0;
 
@@ -20,7 +22,7 @@ class _CameraPageState extends State<CameraPage> {
   }
 
   void startCamera(int direction) async {
-    cameras = await availableCameras();
+    // final cameras = await availableCameras();
     cameraController = CameraController(
       cameras[direction],
       ResolutionPreset.high,
@@ -33,7 +35,8 @@ class _CameraPageState extends State<CameraPage> {
       }
       setState(() {}); // to refesh widget
     }).catchError((e) {
-      print(e);
+      print(e.toString());
+      Utils.showSnackBar(e.toString());
     });
   }
 
@@ -47,35 +50,38 @@ class _CameraPageState extends State<CameraPage> {
   Widget build(BuildContext context) {
     if (cameraController.value.isInitialized) {
       return Scaffold(
-          body: Stack(
-        children: [
-          CameraPreview(cameraController),
-          GestureDetector(
-            onTap: () {
-              setState(
-                () {
-                  direction = direction == 0 ? 1 : 0;
-                  startCamera(direction);
-                },
-              );
-            },
-            child: button(
-                Icons.flip_camera_android_outlined, Alignment.bottomLeft),
-          ),
-          GestureDetector(
-            onTap: () {
-              cameraController.takePicture().then((XFile? file) {
-                if (mounted) {
-                  if (file != null) {
-                    print('Picture saved to ${file.path}');
-                  }
-                }
-              });
-            },
-            child: button(Icons.camera_alt_outlined, Alignment.bottomCenter),
-          ),
-        ],
-      ));
+        body: Stack(
+          children: [
+            CameraPreview(cameraController),
+            GestureDetector(
+              onTap: () {
+                setState(
+                  () {
+                    direction = direction == 0 ? 1 : 0;
+                    startCamera(direction);
+                  },
+                );
+              },
+              child: button(
+                  Icons.flip_camera_android_outlined, Alignment.bottomLeft),
+            ),
+            GestureDetector(
+              onTap: () {
+                cameraController.takePicture().then(
+                  (XFile? file) {
+                    if (mounted) {
+                      if (file != null) {
+                        print('Picture saved to ${file.path}');
+                      }
+                    }
+                  },
+                );
+              },
+              child: button(Icons.camera_alt_outlined, Alignment.bottomCenter),
+            ),
+          ],
+        ),
+      );
     } else {
       return const Center(
         child: CircularProgressIndicator(),
