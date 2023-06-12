@@ -6,6 +6,7 @@ import 'package:camera/camera.dart';
 import 'Utils/snackbar_utils.dart';
 
 List<CameraDescription> cameras = <CameraDescription>[];
+//better to make this a singleton than global variable
 
 void main() async {
   try {
@@ -14,8 +15,8 @@ void main() async {
   } on CameraException catch (e) {
     print(e.toString());
     Utils.showSnackBar(e.toString());
-    
   }
+  
   runApp(ChangeNotifierProvider(
     create: (_) => FormProvider(),
     child: const MyApp(),

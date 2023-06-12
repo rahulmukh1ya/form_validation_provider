@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:form_validation/Utils/snackbar_utils.dart';
@@ -66,16 +68,17 @@ class _CameraPageState extends State<CameraPage> {
                   Icons.flip_camera_android_outlined, Alignment.bottomLeft),
             ),
             GestureDetector(
-              onTap: () {
-                cameraController.takePicture().then(
-                  (XFile? file) {
-                    if (mounted) {
-                      if (file != null) {
-                        print('Picture saved to ${file.path}');
-                      }
-                    }
-                  },
-                );
+              onTap: () async {
+                try {
+                  final image = await cameraController.takePicture();
+                  if (!mounted) return;
+
+                  await Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => DisplayImage(imagePath: image.path),
+                  ));
+                } catch (e) {
+                  print(e);
+                }
               },
               child: button(Icons.camera_alt_outlined, Alignment.bottomCenter),
             ),
@@ -118,4 +121,17 @@ Widget button(IconData icon, Alignment alignment) {
       ),
     ),
   );
+}
+
+class DisplayImage extends StatelessWidget {
+  final String imagePath;
+  const DisplayImage({super.key, required this.imagePath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Display the Picture')),
+      body: Image.file(File(imagePath)),
+    );
+  }
 }

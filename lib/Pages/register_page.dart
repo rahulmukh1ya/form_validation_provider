@@ -88,11 +88,35 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               ),
               Positioned(
                 top: 225,
-                // child: CircleAvatar(
-                //   backgroundColor: Colors.grey,
-                //   radius: 50,
-                // ),
-                child: ElevatedButton(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => const CameraPage(),
+                    ));
+                  },
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.grey[100],
+                        image: const DecorationImage(
+                            image: AssetImage('assets/add_photo_1.png'),
+                            fit: BoxFit.none)),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+/*
+ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => const CameraPage(),
@@ -105,11 +129,4 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   ),
                   child: const Icon(Icons.camera_alt),
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+ */
