@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:form_validation/Utils/snackbar_utils.dart';
@@ -73,9 +72,8 @@ class _CameraPageState extends State<CameraPage> {
                   final image = await cameraController.takePicture();
                   if (!mounted) return;
 
-                  await Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => DisplayImage(imagePath: image.path),
-                  ));
+                  Navigator.pop(context, image.path);
+                
                 } catch (e) {
                   print(e);
                 }
@@ -135,3 +133,4 @@ class DisplayImage extends StatelessWidget {
     );
   }
 }
+

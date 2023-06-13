@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:form_validation/Pages/Camera/camera_page.dart';
 import 'Form/provider_form_page.dart';
@@ -10,6 +12,7 @@ class RegisterWidget extends StatefulWidget {
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
+  var imagePath = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,23 +92,30 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               Positioned(
                 top: 225,
                 child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
+                  onTap: () async {
+                    imagePath =
+                        await Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => const CameraPage(),
                     ));
+                    setState(() {});
                   },
                   child: Container(
                     height: 100,
                     width: 100,
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.grey[100],
-                        image: const DecorationImage(
-                            image: AssetImage('assets/add_photo_1.png'),
-                            fit: BoxFit.none)),
+                      shape: BoxShape.circle,
+                      color: Colors.grey[100],
+                      image: imagePath == ''
+                          ? const DecorationImage(
+                              image: AssetImage('assets/add_photo_1.png'),
+                              fit: BoxFit.none)
+                          : DecorationImage(
+                              image: FileImage(File(imagePath)),
+                              fit: BoxFit.cover),
+                    ),
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ),
