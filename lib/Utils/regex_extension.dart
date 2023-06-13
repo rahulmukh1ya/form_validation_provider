@@ -11,8 +11,7 @@ extension ExtString on String {
   }
 
   bool get isValidPassword {
-    final passwordRegExp = RegExp(
-        r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$');
+    final passwordRegExp = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$');
     return passwordRegExp.hasMatch(this);
   }
 
@@ -21,12 +20,9 @@ extension ExtString on String {
     return zipCodeRegExp.hasMatch(this);
   }
 
-  // bool get isNotNull {
-  //   return this!=null;
-  // }
-
   bool get isValidPhone {
-    final phoneRegExp = RegExp(r"^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$");
+    final phoneRegExp =
+        RegExp(r"^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$");
     return phoneRegExp.hasMatch(this);
   }
 }

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:form_validation/Utils/snackbar_utils.dart';
+// import 'package:form_validation/Utils/snackbar_utils.dart';
 import 'package:form_validation/main.dart';
 
 class CameraPage extends StatefulWidget {
@@ -37,7 +37,7 @@ class _CameraPageState extends State<CameraPage> {
       setState(() {}); // to refesh widget
     }).catchError((e) {
       print(e.toString());
-      Utils.showSnackBar(e.toString());
+      // Utils.showSnackBar(e.toString());
     });
   }
 

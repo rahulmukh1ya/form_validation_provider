@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'Provider/form_provider.dart';
 import 'Pages/register_page.dart';
 import 'package:camera/camera.dart';
-import 'Utils/snackbar_utils.dart';
+// import 'Utils/snackbar_utils.dart';
 
 List<CameraDescription> cameras = <CameraDescription>[];
 //better to make this a singleton than global variable
@@ -14,7 +14,7 @@ void main() async {
     cameras = await availableCameras();
   } on CameraException catch (e) {
     print(e.toString());
-    Utils.showSnackBar(e.toString());
+    // Utils.showSnackBar(e.toString());
   }
   
   runApp(ChangeNotifierProvider(

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:form_validation/Provider/form_provider.dart';
 import 'custom_form_field.dart';
 import '../home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProviderFormPage extends StatefulWidget {
   const ProviderFormPage({super.key});
@@ -15,6 +16,25 @@ class ProviderFormPage extends StatefulWidget {
 class _ProviderFormPageState extends State<ProviderFormPage> {
   final _formKey = GlobalKey<FormState>();
   late FormProvider _formProvider;
+
+  void saveUserData({
+    required String userName,
+    required String userEmail,
+    required int userPhone,
+    required String userPassword,
+    required String userAddress,
+    required int userZipCode,
+    int userSecPhone = 0000000000,
+  }) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString("userName", userName);
+    await prefs.setString("userEmail", userEmail);
+    await prefs.setInt("userPhone", userPhone);
+    await prefs.setString("userPassword", userPassword);
+    await prefs.setString("userAddress", userAddress);
+    await prefs.setInt("userZipCode", userZipCode);
+    await prefs.setInt("userSecPhone", userSecPhone);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +120,17 @@ class _ProviderFormPageState extends State<ProviderFormPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (model.validate) {
+                        saveUserData(
+                          userName: model.name.value!,
+                          userEmail: model.email.value!,
+                          userPhone: int.parse(model.phone.value!),
+                          userPassword: model.password.value!,
+                          userAddress: model.address.value!,
+                          userZipCode: int.parse(model.zipCode.value!),
+                          userSecPhone:
+                              int.parse(model.secPhone.value ?? "0000000000"),
+                        );
+
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (_) => const HomePage(),
                         ));

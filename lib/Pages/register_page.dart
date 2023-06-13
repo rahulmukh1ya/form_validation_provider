@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:form_validation/Pages/Camera/camera_page.dart';
 import 'Form/provider_form_page.dart';
@@ -110,7 +109,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                               image: AssetImage('assets/add_photo_1.png'),
                               fit: BoxFit.none)
                           : DecorationImage(
-                              image: FileImage(File(imagePath)),
+                              image: FileImage(
+                                File(imagePath),
+                              ),
                               fit: BoxFit.cover),
                     ),
                   ),
@@ -123,20 +124,3 @@ class _RegisterWidgetState extends State<RegisterWidget> {
     );
   }
 }
-
-
-/*
-ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => const CameraPage(),
-                    ));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(35),
-                    backgroundColor: Colors.grey,
-                  ),
-                  child: const Icon(Icons.camera_alt),
-                ),
- */
