@@ -34,6 +34,7 @@ class _ProviderFormPageState extends State<ProviderFormPage> {
     await prefs.setString("userAddress", userAddress);
     await prefs.setInt("userZipCode", userZipCode);
     await prefs.setInt("userSecPhone", userSecPhone);
+    await prefs.setBool("isLoggedIn", true);
   }
 
   @override
@@ -130,7 +131,6 @@ class _ProviderFormPageState extends State<ProviderFormPage> {
                           userSecPhone:
                               int.parse(model.secPhone.value ?? "0000000000"),
                         );
-
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (_) => const HomePage(),
                         ));

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:form_validation/Pages/Camera/camera_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Form/provider_form_page.dart';
 
 class RegisterWidget extends StatefulWidget {
@@ -96,6 +97,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                         await Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => const CameraPage(),
                     ));
+                    final SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    await prefs.setString("userImage", imagePath);
                     setState(() {});
                   },
                   child: Container(

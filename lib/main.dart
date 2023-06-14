@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:form_validation/Pages/home_page.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Provider/form_provider.dart';
 import 'Pages/register_page.dart';
 import 'package:camera/camera.dart';
@@ -14,17 +16,22 @@ void main() async {
     cameras = await availableCameras();
   } on CameraException catch (e) {
     print(e.toString());
-    // Utils.showSnackBar(e.toString());
   }
-  
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final isLoggedIn = (prefs.getBool('isLoggedIn') == null)
+      ? false
+      : prefs.getBool('isLoggedIn');
   runApp(ChangeNotifierProvider(
     create: (_) => FormProvider(),
-    child: const MyApp(),
+    child: MyApp(
+      isLoggedIn: isLoggedIn!,
+    ),
   ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
+  const MyApp({super.key, this.isLoggedIn = false});
 
   // This widget is the root of your application.
   @override
@@ -32,7 +39,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const RegisterWidget(),
+      home: isLoggedIn ? const HomePage() : const RegisterWidget(),
     );
   }
 }
