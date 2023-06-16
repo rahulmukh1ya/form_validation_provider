@@ -17,7 +17,7 @@ class _ProviderFormPageState extends State<ProviderFormPage> {
   final _formKey = GlobalKey<FormState>();
   late FormProvider _formProvider;
 
-  void saveUserData({
+  Future<void> saveUserData({
     required String userName,
     required String userEmail,
     required int userPhone,
@@ -119,9 +119,9 @@ class _ProviderFormPageState extends State<ProviderFormPage> {
                 return Padding(
                   padding: const EdgeInsets.all(15),
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (model.validate) {
-                        saveUserData(
+                        await saveUserData(
                           userName: model.name.value!,
                           userEmail: model.email.value!,
                           userPhone: int.parse(model.phone.value!),
@@ -131,6 +131,7 @@ class _ProviderFormPageState extends State<ProviderFormPage> {
                           userSecPhone:
                               int.parse(model.secPhone.value ?? "0000000000"),
                         );
+                        if(!mounted) return; 
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (_) => const HomePage(),
                         ));

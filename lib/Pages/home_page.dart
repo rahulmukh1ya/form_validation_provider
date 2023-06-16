@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void deleteUserData() async {
+  Future<void> deleteUserData() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove("userName");
     prefs.remove("userEmail");
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 5),
             Row(
               children: [
-                const Text('Phone Number'),
+                const Text('Phone Number: '),
                 Text(userPhone),
               ],
             ),
@@ -122,8 +122,9 @@ class _HomePageState extends State<HomePage> {
               height: 10,
             ),
             ElevatedButton(
-              onPressed: () {
-                deleteUserData();
+              onPressed: () async {
+                await deleteUserData();
+                if(!mounted) return;
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
